@@ -15,4 +15,20 @@ public class BookRepository {
     public List<Book> findAll() {
         return this.stock.getBooks();
     }
+
+    public Book findById(int id) {
+        return this.stock.getBooks().stream().filter(book -> book.getId() == id).findFirst().orElse(null);
+    }
+
+    public int decrement(Book book, int amount) {
+        int currentAmount = book.getQuantity();
+        book.setQuantity(currentAmount - amount);
+        return book.getQuantity();
+    }
+
+    public int increment(Book book, int amount) {
+        int currentAmount = book.getQuantity();
+        book.setQuantity(currentAmount + amount);
+        return book.getQuantity();
+    }
 }
