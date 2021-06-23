@@ -9,7 +9,7 @@ public class BookShelf {
     }
     //endregion
 
-    //region Functions Public
+    //region Functions
     public void display() {
         List<Book> bookList = repository.findAll();
 

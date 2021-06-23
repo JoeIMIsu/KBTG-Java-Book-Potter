@@ -7,17 +7,17 @@ public class BookRepository {
         this.stock = stock;
     }
 
-    public int count(String s) {
-        List<Book> books = stock.getBooks();
-        return books.stream().filter(book -> book.getTitle().equals(s)).findFirst().map(Book::getQuantity).orElse(0);
-    }
-
     public List<Book> findAll() {
         return this.stock.getBooks();
     }
 
     public Book findById(int id) {
         return this.stock.getBooks().stream().filter(book -> book.getId() == id).findFirst().orElse(null);
+    }
+
+    public int countByTitle(String title) {
+        List<Book> books = stock.getBooks();
+        return books.stream().filter(book -> book.getTitle().equals(title)).findFirst().map(Book::getQuantity).orElse(0);
     }
 
     public int decrement(Book book, int amount) {

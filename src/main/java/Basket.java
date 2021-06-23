@@ -37,7 +37,7 @@ public class Basket {
         calculator.calculatePrice();
     }
 
-    public boolean remove(Book removeBook) {
+    public boolean removeBook(Book removeBook) {
         boolean result = false;
 
         for (Book book : this.books) {
@@ -73,8 +73,8 @@ public class Basket {
         return calculator.getDiscount();
     }
 
-    public double displayTotal() {
-        return calculator.getTotal();
+    public double displayTotalPrice() {
+        return calculator.getTotalPrice();
     }
 
     public double displaySubTotal() {

@@ -7,7 +7,7 @@ public class Calculator {
 
     private List<int[]> groupBooks;
     private double discount;
-    private double total;
+    private double totalPrice;
     private double subTotal;
 
     public Calculator() {
@@ -20,8 +20,8 @@ public class Calculator {
         return discount;
     }
 
-    public double getTotal() {
-        return total;
+    public double getTotalPrice() {
+        return totalPrice;
     }
 
     public double getSubTotal() {
@@ -61,8 +61,9 @@ public class Calculator {
         }
     }
 
-    public void reset() {
+    public boolean reset() {
         initGroup();
+        return true;
     }
 
     public void calculatePrice() {
@@ -80,8 +81,8 @@ public class Calculator {
         }
 
         this.discount = discountList.stream().mapToDouble(aDouble -> aDouble).sum();
-        this.total = priceList.stream().mapToDouble(aDouble -> aDouble).sum();
-        this.subTotal = this.total - discount;
+        this.totalPrice = priceList.stream().mapToDouble(aDouble -> aDouble).sum();
+        this.subTotal = this.totalPrice - discount;
 
     }
 
