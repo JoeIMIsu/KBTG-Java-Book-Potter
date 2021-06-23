@@ -4,10 +4,12 @@ import java.util.List;
 public class Basket {
     private final Customer customer;
     private List<Book> books;
+    private final Calculator calculator;
 
-    public Basket(Customer customer) {
+    public Basket(Customer customer, Calculator calculator) {
         this.customer = customer;
         this.books = new ArrayList<>();
+        this.calculator = calculator;
     }
 
     //region Get Set
@@ -29,6 +31,31 @@ public class Basket {
     //region Functions
     public void addBook(Book book) {
         books.add(book);
+        for (int i = 0; i < book.getQuantity(); i++) {
+            calculator.addBookId(book.getId());
+        }
+        calculator.calculatePrice();
+    }
+
+    public boolean remove(Book removeBook) {
+        boolean result = false;
+
+        for (Book book : this.books) {
+            if (book.getId() == removeBook.getId()) {
+                this.books.remove(book);
+                for (int i = 0; i < removeBook.getQuantity(); i++) {
+                    this.calculator.removeBookId(removeBook.getId());
+                }
+                result = true;
+                break;
+            }
+        }
+
+        return result;
+    }
+
+    public Book getBook(String title) {
+        return this.books.stream().filter(book -> book.getTitle().equals(title)).findFirst().orElse(null);
     }
 
     public int displayCount() {
@@ -42,21 +69,16 @@ public class Basket {
         }
     }
 
-    public Book getBook(String title) {
-        return this.books.stream().filter(book -> book.getTitle().equals(title)).findFirst().orElse(null);
+    public double displayDiscount() {
+        return calculator.getDiscount();
     }
 
-    public boolean remove(Book removeBook) {
-        for (Book book : this.books) {
-            if (book.getId() == removeBook.getId()) {
-                this.books.remove(book);
-                return true;
-            }
-        }
-
-        return false;
+    public double displayTotal() {
+        return calculator.getTotal();
     }
 
-
+    public double displaySubTotal() {
+        return calculator.getSubTotal();
+    }
     //endregion
 }
