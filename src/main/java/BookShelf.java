@@ -29,7 +29,6 @@ public class BookShelf {
         bookSelect.setQuantity(amount);
 
         // decrement
-//        int remain = decrement(findBook, amount);
         int remain = repository.decrement(findBook, amount);
 
         return bookSelect;
